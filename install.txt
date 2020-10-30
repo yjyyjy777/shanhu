@@ -1,0 +1,135 @@
+
+
+
+安装
+参看笔者另一篇博文《CentOS7 开箱配置指南汇总(备忘)》。在此重复一下：
+
+Nginx安装
+先加载Nginx的源
+rpm -Uvh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
+
+yum安装
+yum install -y nginx
+
+启动服务并加入开机启动项
+systemctl start nginx.service
+systemctl enable nginx.service
+1
+2
+3
+4
+5
+6
+7
+8
+9
+PHP7.2安装
+添加源
+rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm
+
+yum安装
+yum -y install php72w
+
+拓展包
+yum -y install php72w-cli php72w-common php72w-devel php72w-mysql
+
+php-fpm支持
+yum -y install php72w-fpm
+
+
+修改/var/lib/php下的目录权限
+chmod777 -R *
+
+--------------------------------------------------------------------------------------
+
+一、安装java
+1、搜索java包
+yum search java
+2、安装java包
+yum install java-1.8.0-openjdk.x86_64
+3、查看java安装目录
+whereis java  #找到Java目录
+一般在： /usr/lib/jvm/  下：
+
+
+
+ 
+
+ 
+
+ 
+
+二、配置Java路径到/etc/profile中
+编辑 /etc/profile 文件，
+
+添加如下内容：
+export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.232.b09-0.el7_7.x86_64/jre
+export JRE_HOME=${JAVA_HOME}
+export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib
+export PATH=${JAVA_HOME}/bin:$PATH
+保存之后，重新加载 profile，运行以下命令：
+source /etc/profile
+ 
+
+以上，java环境即设置完毕。
+------------------------------------------------------------------
+redis
+yum install redis
+
+
+
+
+
+
+
+
+
+---------------------------------------------------------------
+mysql
+cd /root
+mkdir mysql
+cd mysql
+yum install wget
+rpm -e mariadb-libs-5.5.56-2.el7.x86_64  --nodeps
+wget https://downloads.mysql.com/archives/get/p/23/file/mysql-5.7.31-1.el7.x86_64.rpm-bundle.tar
+tar -xvf mysql-5.7.31-1.el7.x86_64.rpm-bundle.tar
+service mysqld restart
+
+grep 'password' /var/log/mysqld.log |head -n 1
+mysql -uroot -p
+输入密码
+set password for root@localhost = password('Nationsky1@3');
+source /root/yjy.sql
+
+
+----------------------------------------------
+mongodb
+
+cat >> /etc/yum.repos.d/mongodb-3.4.repo << 'EOF'
+
+[mongodb-org-3.4]
+
+name=MongoDB 3.4 Repository
+
+baseurl=https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/3.4/x86_64/
+
+gpgcheck=0
+
+enabled=1
+
+EOF
+
+
+yum install mongodb-org
+systemctl start mongod.service
+
+----------------------------------------------------
+java
+用rpm包安装
+export
+
+
+
+
+
