@@ -1,0 +1,88 @@
+# shanhu
+
+Nginx安装
+先加载Nginx的源
+rpm -Uvh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
+
+yum安装
+yum install -y nginx
+
+启动服务并加入开机启动项
+systemctl start nginx.service
+systemctl enable nginx.service
+-------------------------------------------------------------------------------------
+PHP7.2安装
+添加源
+rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm
+
+yum安装
+yum -y install php72w
+
+拓展包
+yum -y install php72w-cli php72w-common php72w-devel php72w-mysql
+
+php-fpm支持
+yum -y install php72w-fpm
+
+
+修改/var/lib/php下的目录权限
+chmod777 -R *
+
+--------------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------
+redis
+yum install redis
+
+
+
+
+
+
+
+
+
+---------------------------------------------------------------
+mysql
+cd /root
+mkdir mysql
+cd mysql
+yum install wget
+rpm -e mariadb-libs-5.5.56-2.el7.x86_64  --nodeps
+wget https://downloads.mysql.com/archives/get/p/23/file/mysql-5.7.31-1.el7.x86_64.rpm-bundle.tar
+tar -xvf mysql-5.7.31-1.el7.x86_64.rpm-bundle.tar
+service mysqld restart
+
+grep 'password' /var/log/mysqld.log |head -n 1
+mysql -uroot -p
+输入密码
+set password for root@localhost = password('Nationsky1@3');
+source /root/yjy.sql
+
+
+----------------------------------------------
+mongodb
+
+cat >> /etc/yum.repos.d/mongodb-3.4.repo << 'EOF'
+
+[mongodb-org-3.4]
+
+name=MongoDB 3.4 Repository
+
+baseurl=https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/3.4/x86_64/
+
+gpgcheck=0
+
+enabled=1
+
+EOF
+
+
+yum install mongodb-org
+systemctl start mongod.service
+
+----------------------------------------------------
+java
+用rpm包安装
