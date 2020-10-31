@@ -1,0 +1,26 @@
+#!/bin/bash
+
+#查找的字符串
+str1="hostname"
+str3="=:1234"
+
+#新字符串
+newstr="$str1$str3"
+echo $newstr
+#被替换的文件名
+filename="1.txt"
+
+#获取指定字符串的行号
+line=`sed -n "/$str1/=" $filename`
+echo $line
+if [ ! -n "$line" ]; then
+
+ echo "IS NULL"
+ exit
+fi
+#删除这行
+sed -i "$line d" $filename
+
+#在删除的行插入新字符串
+sed -i "$line s/^/$newstr\n/" $filename
+                                       
