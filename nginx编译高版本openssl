@@ -1,4 +1,8 @@
 原则
+编译环境依赖
+yum install gcc-c++
+yum install -y pcre pcre-devel
+yum install -y zlib zlib-devel
 
 下载最新的openssl nginx
 在操作系统上编译时，使用--with-openssl=./openssl-1.1.1h
