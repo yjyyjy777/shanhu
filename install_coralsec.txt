@@ -2,8 +2,6 @@
 
 
 安装
-参看笔者另一篇博文《CentOS7 开箱配置指南汇总(备忘)》。在此重复一下：
-
 Nginx安装
 先加载Nginx的源
 rpm -Uvh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
