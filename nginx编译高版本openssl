@@ -1,0 +1,52 @@
+原则
+
+下载最新的openssl nginx
+在操作系统上编译时，使用--with-openssl=./openssl-1.1.1h
+并不需要在系统上升级openssl
+指定openssl源码目录即可
+在升级之前，备份nginx相关文件，包括启动脚本、etc/init.d/nginx
+tips:可以用编译好的nginx，替换/usr/sbin/nginx
+
+./configure --prefix=/etc/nginx --sbin-path=/usr/sbin/nginx --modules-path=/usr/lib64/nginx/modules --conf-path=/etc/nginx/nginx.conf --error-log-path=/var/log/nginx/error.log --http-log-path=/var/log/nginx/access.log --pid-path=/var/run/nginx.pid --lock-path=/var/run/nginx.lock --http-client-body-temp-path=/var/cache/nginx/client_temp --http-proxy-temp-path=/var/cache/nginx/proxy_temp --http-fastcgi-temp-path=/var/cache/nginx/fastcgi_temp --http-uwsgi-temp-path=/var/cache/nginx/uwsgi_temp --http-scgi-temp-path=/var/cache/nginx/scgi_temp --user=nginx --group=nginx --with-compat --with-file-aio --with-threads --with-http_addition_module --with-http_auth_request_module --with-http_dav_module --with-http_flv_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_mp4_module --with-http_random_index_module --with-http_realip_module --with-http_secure_link_module --with-http_slice_module --with-http_ssl_module --with-http_stub_status_module --with-http_sub_module --with-http_v2_module --with-mail --with-mail_ssl_module --with-stream --with-stream_realip_module --with-stream_ssl_module --with-stream_ssl_preread_module --with-cc-opt='-O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector --param=ssp-buffer-size=4 -m64 -mtune=generic -fPIC' --with-ld-opt='-Wl,-z,relro -Wl,-z,now -pie' --with-openssl=./openssl-1.1.1h
+
+--------------------------------------------------------------------------------------
+nginx升级并且使用最新版本openssl
+目录
+openssl
+nginx安装
+./nginx -V查看配置信息
+仅供本人自己记录参考
+
+openssl
+
+cd /usr/local/src/
+
+wget https://www.openssl.org/source/openssl-1.1.1g.tar.gz
+
+tar zxfv openssl-1.1.1g.tar.gz
+
+nginx安装
+
+记得备份之前的nginx配置
+
+先停止nginx 
+
+lsof -i:80
+
+kill -9 nginx进程号
+
+
+mkdir -p /usr/local/nginx
+
+cd /usr/local/nginx
+
+wget https://nginx.org/download/nginx-1.18.0.tar.gz
+
+tar -zxvf nginx-1.18.0.tar.gz 
+cd nginx-1.18.0
+本机自己安装openssl目录
+./configure --prefix=/usr/local/nginx --with-http_ssl_module --with-http_stub_status_module --with-openssl=/usr/local/src/openssl-1.1.1g
+
+make && make install
+
+
