@@ -31,28 +31,7 @@ chmod777 -R *
 
 --------------------------------------------------------------------------------------
 
-一、安装java
-1、搜索java包
-yum search java
-2、安装java包
-yum install java-1.8.0-openjdk.x86_64
-3、查看java安装目录
-whereis java  #找到Java目录
-一般在： /usr/lib/jvm/  下：
 
-二、配置Java路径到/etc/profile中
-编辑 /etc/profile 文件，
-
-添加如下内容：
-export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.232.b09-0.el7_7.x86_64/jre
-export JRE_HOME=${JAVA_HOME}
-export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib
-export PATH=${JAVA_HOME}/bin:$PATH
-保存之后，重新加载 profile，运行以下命令：
-source /etc/profile
- 
-
-以上，java环境即设置完毕。
 ------------------------------------------------------------------
 redis
 yum install redis
