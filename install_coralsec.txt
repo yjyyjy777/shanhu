@@ -1,6 +1,4 @@
 
-
-
 安装
 Nginx安装
 先加载Nginx的源
@@ -12,15 +10,7 @@ yum install -y nginx
 启动服务并加入开机启动项
 systemctl start nginx.service
 systemctl enable nginx.service
-1
-2
-3
-4
-5
-6
-7
-8
-9
+
 PHP7.2安装
 添加源
 rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
@@ -50,14 +40,6 @@ yum install java-1.8.0-openjdk.x86_64
 whereis java  #找到Java目录
 一般在： /usr/lib/jvm/  下：
 
-
-
- 
-
- 
-
- 
-
 二、配置Java路径到/etc/profile中
 编辑 /etc/profile 文件，
 
@@ -74,14 +56,6 @@ source /etc/profile
 ------------------------------------------------------------------
 redis
 yum install redis
-
-
-
-
-
-
-
-
 
 ---------------------------------------------------------------
 mysql
