@@ -1,3 +1,8 @@
+临时密码
+grep 'password' /var/log/mysqld.log |head -n 1
+mysql -uroot -p
+输入密码
+set password for root@localhost = password('Nationsky1@3');
 重置密码
 mysql> set global validate_password_policy=0;
 mysql> set global validate_password_number_count=0; 
