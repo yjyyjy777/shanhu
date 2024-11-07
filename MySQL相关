@@ -13,8 +13,8 @@ mysql> grant all privileges on *.* to root@'%';
 
 带数据主从同步
 
-mysqldump -u root -pNationsky1@3 --databases  mdm --single-transaction --master-data=2 > master_backup.sql
-
+#mysqldump -u root -pNationsky1@3 --databases  mdm --single-transaction --master-data=2 > master_backup.sql
+mysqldump -u root -pNationsky1@3 --databases  mdm --single-transaction --source-data=2 > master_backup.sql
 single-transaction锁所有表，保持一致
 --master-data=2 导出的sql文件头里，有position和文件信息 提示可能用这个代替 U --source-data 代替
 
